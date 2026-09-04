@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import ContactModal from '@/components/ContactModal'
+import { ContactModal } from '@/components/ContactModal'
 
 export default function Home() {
   const portfolioRef = useRef(null)

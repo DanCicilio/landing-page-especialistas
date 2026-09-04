@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-export default function ContactModal() {
+export function ContactModal() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
