@@ -52,18 +52,32 @@ export default function ContactModal() {
                 💼 LinkedIn
               </a>
               <a
-                href="https://wa.me/5511999999999"
+                href={`https://wa.me/55${process.env.NEXT_PUBLIC_DAN_WHATSAPP}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-bold hover:bg-green-700 transition button"
               >
-                💬 WhatsApp
+                💬 Dan - WhatsApp
               </a>
               <a
-                href="mailto:dan@cicilio.dev"
+                href={`mailto:${process.env.NEXT_PUBLIC_DAN_EMAIL}`}
                 className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-bold hover:bg-red-700 transition button"
               >
-                📧 Email
+                📧 Dan - Email
+              </a>
+              <a
+                href={`https://wa.me/55${process.env.NEXT_PUBLIC_PRI_WHATSAPP}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-bold hover:bg-green-700 transition button"
+              >
+                💬 Pri - WhatsApp
+              </a>
+              <a
+                href={`mailto:${process.env.NEXT_PUBLIC_PRI_EMAIL}`}
+                className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-bold hover:bg-red-700 transition button"
+              >
+                📧 Pri - Email
               </a>
               <a
                 href="https://instagram.com/dancicilio"
