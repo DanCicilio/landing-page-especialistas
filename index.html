@@ -1,0 +1,503 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #0a0e27;
+      line-height: 1.6;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+    }
+
+    .hero-title {
+      animation: fadeInDown 1s ease-out;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hero-subtitle {
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .hero-button {
+      animation: slideInUp 1s ease-out 0.4s both;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-card {
+      animation: scaleIn 0.6s ease-out;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-20px);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+    }
+
+    .project-card {
+      animation: fadeInUp 0.8s ease-out;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .project-card:hover::before {
+      left: 100%;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05) translateY(-15px);
+      box-shadow: 0 30px 60px rgba(99, 102, 241, 0.4);
+    }
+
+    .team-member {
+      animation: fadeInUp 0.8s ease-out;
+      transition: all 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+
+    .team-avatar {
+      animation: float 3s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .team-member:hover .team-avatar {
+      animation: pulse 0.6s ease-in-out;
+    }
+
+    .button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      transition: left 0.5s ease;
+    }
+
+    .button:hover::before {
+      left: 100%;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    a { color: #6366f1; text-decoration: none; transition: all 0.3s; }
+    a:hover { color: #4f46e5; }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .accent-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, #ec4899, #6366f1);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+      margin-right: 8px;
+    }
+  </style>
+</helmet>
+
+<!-- HERO SECTION -->
+<section style="padding: 140px 24px 100px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent); border-radius: 50%;"></div>
+  <div style="position: absolute; bottom: -30%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(236, 72, 153, 0.1), transparent); border-radius: 50%;"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div style="max-width: 900px;">
+      <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div class="accent-dot"></div>
+        <span style="color: #a78bfa; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Soluções de Design Web</span>
+      </div>
+
+      <h1 class="hero-title" style="font-size: 72px; line-height: 1.1; color: white; margin-bottom: 20px; font-weight: 800;">
+        Websites que <span class="gradient-text">convertem</span> seus clientes
+      </h1>
+
+      <p class="hero-subtitle" style="font-size: 22px; color: #cbd5e1; margin-bottom: 50px; line-height: 1.8; max-width: 700px; font-weight: 300;">
+        Design premium, performance otimizada e estratégia digital para empresas que querem crescer. Criamos experiências web que vendem.
+      </p>
+
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 60px;">
+        <button class="button" style="padding: 18px 50px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4); transition: all 0.3s ease;">
+          Ver Portfólio
+        </button>
+        <button class="button" style="padding: 18px 50px; background: rgba(255,255,255,0.1); color: white; border: 2px solid #a78bfa; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s ease;">
+          Conversa Rápida
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="animation: fadeInUp 1s ease-out 0.5s both;">
+          <div style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #06b6d4, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">15+</div>
+          <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">Projetos Entregues</p>
+        </div>
+        <div style="animation: fadeInUp 1s ease-out 0.6s both;">
+          <div style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #ec4899, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">99%</div>
+          <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">Satisfação do Cliente</p>
+        </div>
+        <div style="animation: fadeInUp 1s ease-out 0.7s both;">
+          <div style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">25+ anos</div>
+          <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">Desde 1999</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section style="padding: 120px 24px; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 80px; animation: fadeInUp 0.8s ease-out;">
+      <span style="color: #6366f1; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Nossa Expertise</span>
+      <h2 style="font-size: 52px; font-weight: 800; color: #0a0e27; margin: 16px 0; line-height: 1.2;">Tudo que você precisa para crescer online</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+      <!-- Service 1 -->
+      <div class="service-card" style="padding: 50px 30px; background: white; border-radius: 16px; border: 2px solid transparent; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1)); border-radius: 0 16px 0 100%; opacity: 0;"></div>
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; z-index: 2;"></div>
+        <h3 style="font-size: 24px; margin-bottom: 12px; color: #0a0e27; font-weight: 800;">Design Premium</h3>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Interfaces modernas, intuitivas e alinhadas com a identidade visual única da sua marca.</p>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card" style="padding: 50px 30px; background: white; border-radius: 16px; border: 2px solid transparent; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(236,72,153,0.1)); border-radius: 0 16px 0 100%; opacity: 0;"></div>
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #14b8a6); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; z-index: 2;"></div>
+        <h3 style="font-size: 24px; margin-bottom: 12px; color: #0a0e27; font-weight: 800;">Performance</h3>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Sites rápidos, otimizados e que convertem visitantes em clientes com velocidade raio.</p>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card" style="padding: 50px 30px; background: white; border-radius: 16px; border: 2px solid transparent; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(59,130,246,0.1)); border-radius: 0 16px 0 100%; opacity: 0;"></div>
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ec4899, #f43f5e); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; z-index: 2;"></div>
+        <h3 style="font-size: 24px; margin-bottom: 12px; color: #0a0e27; font-weight: 800;">Estratégia</h3>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Desenvolvimento focado em resultados mensuráveis e crescimento exponencial do seu negócio.</p>
+      </div>
+
+      <!-- Service 4 - Google Meus Negócios -->
+      <div class="service-card" style="padding: 50px 30px; background: white; border-radius: 16px; border: 2px solid transparent; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(34,197,94,0.1)); border-radius: 0 16px 0 100%; opacity: 0;"></div>
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; z-index: 2;"></div>
+        <h3 style="font-size: 24px; margin-bottom: 12px; color: #0a0e27; font-weight: 800;">Google Meus Negócios</h3>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Otimização, inserção, atualização e gestão completa do seu perfil para máxima visibilidade local e regional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE MEUS NEGÓCIOS SECTION -->
+<section style="padding: 120px 24px; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); position: relative;">
+  <div style="position: absolute; top: 0; left: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent);"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <!-- Left Side -->
+      <div style="animation: slideInLeft 0.8s ease-out;">
+        <span style="color: #3b82f6; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Especialistas em</span>
+        <h2 style="font-size: 48px; font-weight: 800; color: #0a0e27; margin: 12px 0 24px; line-height: 1.2;">Google Meus Negócios</h2>
+        <p style="font-size: 18px; color: #64748b; margin-bottom: 32px; line-height: 1.8; font-weight: 500;">
+          Sua empresa aparecendo nos resultados de busca local. Gerenciamos inserção, atualização e otimização completa do seu perfil para máxima visibilidade e conversão.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;">
+          <div style="display: flex; gap: 16px; align-items: flex-start; animation: fadeInUp 0.8s ease-out 0.1s both;">
+            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">✓</div>
+            <div>
+              <h4 style="font-weight: 700; color: #0a0e27; margin-bottom: 4px;">Inserção Completa</h4>
+              <p style="color: #64748b; font-size: 14px;">Criação e otimização do seu perfil com todas informações essenciais</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start; animation: fadeInUp 0.8s ease-out 0.2s both;">
+            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">✓</div>
+            <div>
+              <h4 style="font-weight: 700; color: #0a0e27; margin-bottom: 4px;">Atualização Regular</h4>
+              <p style="color: #64748b; font-size: 14px;">Manutenção constante com dados atualizados e conteúdo fresco</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start; animation: fadeInUp 0.8s ease-out 0.3s both;">
+            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">✓</div>
+            <div>
+              <h4 style="font-weight: 700; color: #0a0e27; margin-bottom: 4px;">Gestão de Avaliações</h4>
+              <p style="color: #64748b; font-size: 14px;">Monitoramento e resposta estratégica a comentários e ratings</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start; animation: fadeInUp 0.8s ease-out 0.4s both;">
+            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">✓</div>
+            <div>
+              <h4 style="font-weight: 700; color: #0a0e27; margin-bottom: 4px;">Analytics & Relatórios</h4>
+              <p style="color: #64748b; font-size: 14px;">Acompanhamento de visualizações, cliques e conversões mensais</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Stats Card -->
+      <div style="animation: slideInRight 0.8s ease-out;">
+        <div style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); border-radius: 20px; padding: 60px 40px; color: white; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent); border-radius: 50%;"></div>
+
+          <div style="position: relative; z-index: 1;">
+            <div style="margin-bottom: 40px;">
+              <div style="font-size: 48px; font-weight: 800; margin-bottom: 8px;">73%</div>
+              <p style="font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.6;">Das buscas locais resultam em visita presencial</p>
+            </div>
+
+            <div style="padding: 20px; background: rgba(255,255,255,0.15); border-radius: 12px; backdrop-filter: blur(10px); margin-bottom: 30px;">
+              <p style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Benefícios Comprovados:</p>
+              <ul style="list-style: none; font-size: 14px; line-height: 2;">
+                <li>📍 Aparecer no mapa do Google</li>
+                <li>⭐ Aumentar avaliações e credibilidade</li>
+                <li>📞 Mais ligações e mensagens</li>
+                <li>🏪 Mais visitas presenciais</li>
+                <li>💰 Maior ROI em marketing local</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO SECTION -->
+<section style="padding: 120px 24px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); position: relative;">
+  <div style="position: absolute; top: 0; right: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent);"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div style="text-align: center; margin-bottom: 80px; animation: fadeInUp 0.8s ease-out;">
+      <span style="color: #a78bfa; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Portfólio</span>
+      <h2 style="font-size: 52px; font-weight: 800; color: white; margin: 16px 0; line-height: 1.2;">Projetos que transformaram negócios</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px;">
+      <!-- Project 1 -->
+      <div class="project-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; overflow: hidden; cursor: pointer; height: 420px; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; position: relative;">
+        <div>
+          <h3 style="font-size: 28px; color: white; margin-bottom: 12px; font-weight: 800;">Seluma Engenharia</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6;">Website profissional com portfólio de projetos interativo e sistema de contato integrado.</p>
+        </div>
+        <a href="https://seluma.eng.br" target="_blank" rel="noopener" style="color: white; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; gap: 8px;">
+          Explorar Projeto →
+        </a>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; overflow: hidden; cursor: pointer; height: 420px; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; position: relative;">
+        <div>
+          <h3 style="font-size: 28px; color: white; margin-bottom: 12px; font-weight: 800;">Surbi Engenharia</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6;">Plataforma moderna com showcasing de expertise técnica e sistema de propostas online.</p>
+        </div>
+        <a href="https://surbi.eng.br" target="_blank" rel="noopener" style="color: white; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; gap: 8px;">
+          Explorar Projeto →
+        </a>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 20px; overflow: hidden; cursor: pointer; height: 420px; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; position: relative;">
+        <div>
+          <h3 style="font-size: 28px; color: white; margin-bottom: 12px; font-weight: 800;">TrustlyGo</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6;">Solução inovadora com interface intuitiva e arquitetura escalável de última geração.</p>
+        </div>
+        <a href="https://trustlygo.com" target="_blank" rel="noopener" style="color: white; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; gap: 8px;">
+          Explorar Projeto →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM SECTION -->
+<section style="padding: 120px 24px; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 80px; animation: fadeInUp 0.8s ease-out;">
+      <span style="color: #6366f1; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Especialistas</span>
+      <h2 style="font-size: 52px; font-weight: 800; color: #0a0e27; margin: 16px 0; line-height: 1.2;">O time por trás do seu sucesso</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px;">
+      <!-- Member 1 -->
+      <div class="team-member" style="text-align: center;">
+        <div class="team-avatar" style="width: 160px; height: 160px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; margin: 0 auto 32px; box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);"></div>
+        <h3 style="font-size: 24px; margin-bottom: 8px; color: #0a0e27; font-weight: 800;">Dan Cicilio</h3>
+        <p style="color: #6366f1; font-weight: 700; margin-bottom: 8px; font-size: 16px;">Marketeer & Fundador</p>
+        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 16px; font-weight: 600;">Formado em 1999 • Vasta Experiência</p>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Estrategista de marketing digital com 25+ anos de experiência. Lidera a visão estratégica, posicionamento e crescimento exponencial dos negócios digitais.</p>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="team-member" style="text-align: center;">
+        <div class="team-avatar" style="width: 160px; height: 160px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; margin: 0 auto 32px; box-shadow: 0 20px 40px rgba(245, 87, 108, 0.3);"></div>
+        <h3 style="font-size: 24px; margin-bottom: 8px; color: #0a0e27; font-weight: 800;">Pri Martins</h3>
+        <p style="color: #6366f1; font-weight: 700; margin-bottom: 16px; font-size: 16px;">Executiva de Vendas</p>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Especialista em relacionamento comercial e fechamento de negócios. Responsável por conectar soluções estratégicas com os clientes ideais que buscam crescimento real.</p>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="team-member" style="text-align: center;">
+        <div class="team-avatar" style="width: 160px; height: 160px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 20px; margin: 0 auto 32px; box-shadow: 0 20px 40px rgba(79, 172, 254, 0.3);"></div>
+        <h3 style="font-size: 24px; margin-bottom: 8px; color: #0a0e27; font-weight: 800;">Pietro Cicilio</h3>
+        <p style="color: #6366f1; font-weight: 700; margin-bottom: 16px; font-size: 16px;">Estagiário de Criação</p>
+        <p style="color: #64748b; line-height: 1.8; font-weight: 500;">Criativo em formação, trazendo ideias frescas e inovadoras. Trabalha na execução de conceitos e na materialização das estratégias em soluções visuais impactantes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section style="padding: 100px 24px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent); border-radius: 50%;"></div>
+  <div style="position: absolute; bottom: -30%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent); border-radius: 50%;"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; animation: fadeInUp 0.8s ease-out;">
+      <h2 style="font-size: 52px; color: white; margin-bottom: 24px; font-weight: 800; line-height: 1.2;">Pronto para transformar seu negócio?</h2>
+      <p style="font-size: 20px; color: rgba(255,255,255,0.95); margin-bottom: 50px; line-height: 1.8; font-weight: 500;">
+        Vamos criar um website que não apenas apresenta, mas vende. Estratégia, design premium e performance garantida.
+      </p>
+      <button class="button" style="padding: 20px 60px; background: white; color: #6366f1; border: none; border-radius: 12px; font-size: 18px; font-weight: 800; cursor: pointer; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        Agende uma Conversa
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding: 60px 24px 40px; background: #0a0e27; color: white;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+      <div>
+        <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 16px;">Dan Cicilio</h3>
+        <p style="color: #a78bfa; margin-bottom: 20px;">Especialistas em Design Web para PMEs</p>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://linkedin.com/in/dancicilio" target="_blank" rel="noopener" style="color: #a78bfa; font-weight: 700; font-size: 14px; padding: 10px 16px; background: rgba(167, 139, 250, 0.1); border-radius: 8px;">LinkedIn</a>
+          <a href="https://github.com/dancicilio" target="_blank" rel="noopener" style="color: #a78bfa; font-weight: 700; font-size: 14px; padding: 10px 16px; background: rgba(167, 139, 250, 0.1); border-radius: 8px;">GitHub</a>
+          <a href="https://instagram.com/dancicilio" target="_blank" rel="noopener" style="color: #a78bfa; font-weight: 700; font-size: 14px; padding: 10px 16px; background: rgba(167, 139, 250, 0.1); border-radius: 8px;">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 16px;">Serviços</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #cbd5e1;">Design Web</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #cbd5e1;">Performance</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #cbd5e1;">Estratégia Digital</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 16px;">Portfólio</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 12px;"><a href="https://seluma.eng.br" target="_blank" rel="noopener" style="color: #cbd5e1;">Seluma.eng.br</a></li>
+          <li style="margin-bottom: 12px;"><a href="https://surbi.eng.br" target="_blank" rel="noopener" style="color: #cbd5e1;">Surbi.eng.br</a></li>
+          <li style="margin-bottom: 12px;"><a href="https://trustlygo.com" target="_blank" rel="noopener" style="color: #cbd5e1;">TrustlyGo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <p style="color: #64748b; font-size: 14px; margin-bottom: 8px;">© 2024 Dan Cicilio, Pri Martins & Pietro Cicilio. Todos os direitos reservados.</p>
+      <p style="color: #64748b; font-size: 12px;">Designed with precision • Built with passion</p>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script data-dc-script data-props='{"primaryColor":{"editor":"color","default":"#6366f1"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { primaryColor: this.props.primaryColor ?? '#6366f1' };
+  }
+}
+</script>
+</body>
+</html>
