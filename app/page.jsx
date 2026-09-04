@@ -2,9 +2,7 @@
 
 import { useRef, useState } from 'react'
 
-function ContactModal() {
-  const [isOpen, setIsOpen] = useState(false)
-
+function ContactModal({ isOpen, setIsOpen }) {
   return (
     <>
       <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-3 md:hidden">
@@ -55,6 +53,7 @@ function ContactModal() {
 }
 
 export default function Home() {
+  const [isContactOpen, setIsContactOpen] = useState(false)
   const portfolioRef = useRef(null)
 
   const scrollToPortfolio = () => {
@@ -92,7 +91,7 @@ export default function Home() {
                 Ver Portfólio
               </button>
               <button
-                onClick={() => document.querySelector('[data-contact]')?.click()}
+                onClick={() => setIsContactOpen(true)}
                 className="button px-8 py-4 bg-white bg-opacity-10 border-2 border-indigo-400 text-white rounded-xl font-bold text-lg backdrop-blur hover:bg-opacity-20"
               >
                 Conversa Rápida
@@ -311,7 +310,7 @@ export default function Home() {
             Vamos criar um website que não apenas apresenta, mas vende. Estratégia, design premium e performance garantida.
           </p>
           <button
-            onClick={() => document.querySelector('[data-contact]')?.click()}
+            onClick={() => setIsContactOpen(true)}
             className="button px-10 py-4 bg-white text-indigo-600 rounded-xl font-bold text-lg shadow-2xl hover:shadow-3xl"
           >
             Agende uma Conversa
@@ -364,7 +363,7 @@ export default function Home() {
               <h4 className="font-bold mb-4">Contato</h4>
               <p className="text-gray-300 mb-4">Vamos conversar sobre seu próximo projeto!</p>
               <button
-                onClick={() => document.querySelector('[data-contact]')?.click()}
+                onClick={() => setIsContactOpen(true)}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-bold transition"
               >
                 Conversar
@@ -380,8 +379,7 @@ export default function Home() {
       </footer>
 
       {/* Contact Modal */}
-      <div data-contact style={{ display: 'none' }}></div>
-      <ContactModal />
+      <ContactModal isOpen={isContactOpen} setIsOpen={setIsContactOpen} />
     </>
   )
 }
