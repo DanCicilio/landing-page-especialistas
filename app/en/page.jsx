@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { ContactModal } from '@/components/ContactModal'
+import { Hero } from '@/components/sections/Hero'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -13,60 +14,7 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-indigo-800 pt-32 pb-20 px-4 relative overflow-hidden">
-        {/* Background decorative circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500 rounded-full opacity-10 -mr-48 -mt-48"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-500 rounded-full opacity-10 -ml-48 -mb-48"></div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="max-w-3xl mx-auto mb-16 animate-fade-in-down">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-3 h-3 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-full animate-pulse"></span>
-              <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">Web Design Solutions</span>
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Websites that <span className="gradient-text">convert</span> your customers
-            </h1>
-
-            <p className="text-xl md:text-2xl text-slate-200 mb-12 leading-relaxed font-light">
-              Premium design, optimized performance, and digital strategy for businesses that want to grow. We create web experiences that sell.
-            </p>
-
-            <div className="flex flex-col md:flex-row gap-4 mb-16">
-              <button
-                onClick={scrollToPortfolio}
-                className="button px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl"
-              >
-                View Portfolio
-              </button>
-              <button
-                onClick={() => setIsContactOpen(true)}
-                className="button px-8 py-4 bg-white bg-opacity-10 border-2 border-indigo-400 text-white rounded-xl font-bold text-lg backdrop-blur hover:bg-opacity-20"
-              >
-                Quick Chat
-              </button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-white border-opacity-10">
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-600 bg-clip-text text-transparent">15+</div>
-                <p className="text-slate-400 text-sm mt-2">Projects Delivered</p>
-              </div>
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="text-4xl font-bold bg-gradient-to-r from-pink-400 to-red-600 bg-clip-text text-transparent">99%</div>
-                <p className="text-slate-400 text-sm mt-2">Client Satisfaction</p>
-              </div>
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-600 bg-clip-text text-transparent">25+</div>
-                <p className="text-slate-400 text-sm mt-2">Years of Experience</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero locale="en" onViewPortfolio={scrollToPortfolio} onQuickChat={() => setIsContactOpen(true)} />
 
       {/* SERVICES SECTION */}
       <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
