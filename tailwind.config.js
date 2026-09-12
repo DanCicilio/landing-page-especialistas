@@ -23,6 +23,7 @@ module.exports = {
         'spotlight': 'spotlight 2s ease .75s 1 forwards',
         'shimmer-slide': 'shimmer-slide var(--speed) ease-in-out infinite alternate',
         'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
+        'meteor-effect': 'meteor 5s linear infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -57,6 +58,11 @@ module.exports = {
           '15%, 35%': { transform: 'translateZ(0) rotate(90deg)' },
           '65%, 85%': { transform: 'translateZ(0) rotate(270deg)' },
           '100%': { transform: 'translateZ(0) rotate(360deg)' },
+        },
+        meteor: {
+          '0%': { transform: 'rotate(215deg) translateX(0)', opacity: '1' },
+          '70%': { opacity: '1' },
+          '100%': { transform: 'rotate(215deg) translateX(-500px)', opacity: '0' },
         },
       },
     },
