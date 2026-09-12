@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Dan Cicilio, Pri Martins & Pietro Cicilio - Especialistas em Design Web',
-  description: 'Websites modernos e estratégicos para pequenas e médias empresas. Design, Performance e Google Meus Negócios.',
+  title: 'Dan Cicilio — Presença Digital Real para Empresas Locais',
+  description: 'Domínio próprio, site com SEO de verdade e Google Meus Negócios bem posicionado. Presença digital que traz o cliente que já decidiu comprar, não só curiosidade.',
   viewport: 'width=device-width, initial-scale=1',
 }
 
