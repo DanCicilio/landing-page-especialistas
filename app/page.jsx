@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { ContactModal } from '@/components/ContactModal'
 import { Hero } from '@/components/sections/Hero'
+import { Services } from '@/components/sections/Services'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -16,36 +17,7 @@ export default function Home() {
     <>
       <Hero locale="pt" onViewPortfolio={scrollToPortfolio} onQuickChat={() => setIsContactOpen(true)} />
 
-      {/* SERVICES SECTION */}
-      <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20 animate-fade-in-up">
-            <span className="text-indigo-600 text-sm font-bold uppercase tracking-widest">Nossa Expertise</span>
-            <h2 className="text-5xl md:text-6xl font-bold text-dark mt-4 mb-6">
-              Tudo que você precisa para crescer online
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'Design Premium', desc: 'Interfaces modernas, intuitivas e alinhadas com sua marca', color: 'from-indigo-600 to-purple-600' },
-              { title: 'Performance', desc: 'Sites rápidos, otimizados e que convertem visitantes em clientes', color: 'from-emerald-500 to-cyan-600' },
-              { title: 'Estratégia', desc: 'Desenvolvimento focado em resultados mensuráveis e crescimento exponencial', color: 'from-pink-500 to-red-600' },
-              { title: 'Google Meus Negócios', desc: 'Otimização, inserção, atualização e gestão completa do seu perfil', color: 'from-blue-500 to-cyan-600' },
-            ].map((service, i) => (
-              <div
-                key={i}
-                className="service-card p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                <div className={`w-14 h-14 bg-gradient-to-br ${service.color} rounded-xl mb-6`}></div>
-                <h3 className="text-2xl font-bold text-dark mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Services locale="pt" />
 
       {/* GOOGLE MEUS NEGÓCIOS SECTION */}
       <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-white">
