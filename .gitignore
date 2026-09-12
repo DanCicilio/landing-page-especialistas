@@ -17,6 +17,7 @@ Thumbs.db
 # Build
 dist/
 build/
+.next/
 .vercel/
 .env.local
 .env.*.local
