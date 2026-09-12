@@ -6,6 +6,7 @@ import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
 import { GoogleBusiness } from '@/components/sections/GoogleBusiness'
 import { Portfolio } from '@/components/sections/Portfolio'
+import { Team } from '@/components/sections/Team'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -25,51 +26,7 @@ export default function Home() {
 
       <Portfolio locale="pt" forwardedRef={portfolioRef} onQuickChat={() => setIsContactOpen(true)} />
 
-      {/* TEAM SECTION */}
-      <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20 animate-fade-in-up">
-            <span className="text-indigo-600 text-sm font-bold uppercase tracking-widest">Especialistas</span>
-            <h2 className="text-5xl md:text-6xl font-bold text-dark mt-4 mb-6">
-              O time por trás do seu sucesso
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Dan Cicilio',
-                role: 'Marketeer & Fundador',
-                desc: 'Formado em 1999 • 25+ Anos de Experiência',
-                bio: 'Estrategista de marketing digital com vasta experiência. Lidera a visão estratégica, posicionamento e crescimento dos negócios digitais.',
-                gradient: 'from-purple-600 to-pink-600',
-              },
-              {
-                name: 'Pri Martins',
-                role: 'Executiva de Vendas',
-                desc: 'Especialista em Relacionamento Comercial',
-                bio: 'Especialista em relacionamento comercial e fechamento de negócios. Conecta soluções estratégicas com clientes ideais que buscam crescimento.',
-                gradient: 'from-pink-600 to-red-600',
-              },
-              {
-                name: 'Pietro Cicilio',
-                role: 'Estagiário de Criação',
-                desc: 'Criativo em Formação',
-                bio: 'Criativo em formação, trazendo ideias frescas e inovadoras. Trabalha na execução de conceitos em soluções visuais impactantes.',
-                gradient: 'from-cyan-500 to-blue-600',
-              },
-            ].map((member, i) => (
-              <div key={i} className="team-member text-center">
-                <div className={`team-avatar w-40 h-40 bg-gradient-to-br ${member.gradient} rounded-3xl mx-auto mb-8 shadow-lg`}></div>
-                <h3 className="text-2xl font-bold text-dark mb-2">{member.name}</h3>
-                <p className="text-indigo-600 font-bold mb-2">{member.role}</p>
-                <p className="text-sm text-gray-500 mb-4">{member.desc}</p>
-                <p className="text-gray-700 leading-relaxed">{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Team locale="pt" />
 
       {/* CTA SECTION */}
       <section className="py-32 px-4 bg-gradient-to-r from-indigo-600 to-pink-600 relative overflow-hidden">

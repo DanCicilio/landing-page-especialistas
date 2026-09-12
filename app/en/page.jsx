@@ -6,6 +6,7 @@ import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
 import { GoogleBusiness } from '@/components/sections/GoogleBusiness'
 import { Portfolio } from '@/components/sections/Portfolio'
+import { Team } from '@/components/sections/Team'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -25,51 +26,7 @@ export default function Home() {
 
       <Portfolio locale="en" forwardedRef={portfolioRef} onQuickChat={() => setIsContactOpen(true)} />
 
-      {/* TEAM SECTION */}
-      <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20 animate-fade-in-up">
-            <span className="text-indigo-600 text-sm font-bold uppercase tracking-widest">Specialists</span>
-            <h2 className="text-5xl md:text-6xl font-bold text-dark mt-4 mb-6">
-              The team behind your success
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Dan Cicilio',
-                role: 'Marketer & Founder',
-                desc: 'Graduated in 1999 • 25+ Years of Experience',
-                bio: 'Digital marketing strategist with extensive experience. Leads strategic vision, positioning and growth of digital businesses.',
-                gradient: 'from-purple-600 to-pink-600',
-              },
-              {
-                name: 'Pri Martins',
-                role: 'Sales Executive',
-                desc: 'Business Relationship Specialist',
-                bio: 'Expert in business relationships and deal closing. Connects strategic solutions with ideal customers seeking growth.',
-                gradient: 'from-pink-600 to-red-600',
-              },
-              {
-                name: 'Pietro Cicilio',
-                role: 'Creative Intern',
-                desc: 'Creative in Training',
-                bio: 'Emerging creative, bringing fresh and innovative ideas. Works on executing concepts into impactful visual solutions.',
-                gradient: 'from-cyan-500 to-blue-600',
-              },
-            ].map((member, i) => (
-              <div key={i} className="team-member text-center">
-                <div className={`team-avatar w-40 h-40 bg-gradient-to-br ${member.gradient} rounded-3xl mx-auto mb-8 shadow-lg`}></div>
-                <h3 className="text-2xl font-bold text-dark mb-2">{member.name}</h3>
-                <p className="text-indigo-600 font-bold mb-2">{member.role}</p>
-                <p className="text-sm text-gray-500 mb-4">{member.desc}</p>
-                <p className="text-gray-700 leading-relaxed">{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Team locale="en" />
 
       {/* CTA SECTION */}
       <section className="py-32 px-4 bg-gradient-to-r from-indigo-600 to-pink-600 relative overflow-hidden">
