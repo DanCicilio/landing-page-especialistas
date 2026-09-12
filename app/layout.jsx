@@ -1,5 +1,4 @@
 import './globals.css'
-import { cn } from "@/lib/utils";
 
 export const metadata = {
   title: 'Dan Cicilio, Pri Martins & Pietro Cicilio - Especialistas em Design Web',
