@@ -710,38 +710,25 @@ EOF
 
 ---
 
-### Task 6: Google Meus Negócios section with NumberTicker
+### Task 6 (AMENDED 2026-09-12): Google Business Profile section — problem + before/after ranking
+
+> **This task supersedes the original "NumberTicker" version.** The site's content was repositioned around TrustlyGo's real Google Business Profile / local SEO offer (see the `2026-09-12` commits to `lib/i18n/content.js` — `googleBusiness` now has `problems[]`, `rankingBefore`/`rankingAfter`, `afterHeading`/`after[]` instead of `checklist`/`statValue`/`benefits`). There is no longer a single animatable number in this section's content, so `NumberTicker` no longer fits — this version replaces it with a before/after ranking comparison built from plain Tailwind (no new component library needed for this task).
 
 **Files:**
 - Create: `components/sections/GoogleBusiness.jsx`
 - Modify: `app/page.jsx`, `app/en/page.jsx`
 
 **Interfaces:**
-- Consumes: `content[locale].googleBusiness`; `@/components/ui/number-ticker`.
-- Produces: `export function GoogleBusiness({ locale })`.
+- Consumes: `content[locale].googleBusiness` (shape: `eyebrow`, `heading`, `description`, `problems: string[]`, `rankingLabel`, `rankingBefore: {label, pos}`, `rankingAfter: {label, pos}`, `afterHeading`, `after: string[]`, `cta`).
+- Produces: `export function GoogleBusiness({ locale, onQuickChat })` — `onQuickChat` opens the shared `ContactModal`, same pattern as `Hero`'s `onQuickChat`.
 
-- [ ] **Step 1: Install the component**
-
-```bash
-npx shadcn@latest add @magicui/number-ticker
-```
-
-- [ ] **Step 2: Inspect the generated file**
-
-```bash
-cat components/ui/number-ticker.jsx
-```
-
-Confirm the `NumberTicker` export and its `value`/`className` props.
-
-- [ ] **Step 3: Create the section**
+- [ ] **Step 1: Create the section (no new install needed)**
 
 ```jsx
 // components/sections/GoogleBusiness.jsx
 import { content } from '@/lib/i18n/content'
-import { NumberTicker } from '@/components/ui/number-ticker'
 
-export function GoogleBusiness({ locale }) {
+export function GoogleBusiness({ locale, onQuickChat }) {
   const t = content[locale].googleBusiness
 
   return (
@@ -754,13 +741,10 @@ export function GoogleBusiness({ locale }) {
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">{t.description}</p>
 
             <div className="space-y-4 mb-8">
-              {t.checklist.map((item, i) => (
+              {t.problems.map((problem, i) => (
                 <div key={i} className="flex gap-4 items-start">
-                  <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mt-1">✓</div>
-                  <div>
-                    <h4 className="font-bold text-dark">{item.title}</h4>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
+                  <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold flex-shrink-0 mt-1">!</div>
+                  <p className="text-gray-700 leading-relaxed">{problem}</p>
                 </div>
               ))}
             </div>
@@ -768,20 +752,38 @@ export function GoogleBusiness({ locale }) {
 
           <div className="animate-slide-in-right">
             <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-3xl p-10 text-white shadow-2xl">
-              <div className="text-6xl font-bold mb-4 flex items-baseline">
-                <NumberTicker value={t.statValue} className="text-6xl font-bold text-white" />
-                <span>%</span>
+              <p className="text-sm font-bold uppercase tracking-widest text-blue-100 mb-6">{t.rankingLabel}</p>
+
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <p className="text-sm text-blue-100 mb-1">{t.rankingBefore.label}</p>
+                  <p className="text-4xl font-bold text-blue-200 line-through decoration-2">{t.rankingBefore.pos}</p>
+                </div>
+                <div className="text-3xl px-2">→</div>
+                <div className="text-right">
+                  <p className="text-sm text-blue-100 mb-1">{t.rankingAfter.label}</p>
+                  <p className="text-5xl font-bold text-white">{t.rankingAfter.pos}</p>
+                </div>
               </div>
-              <p className="text-lg mb-8 leading-relaxed">{t.statCaption}</p>
 
               <div className="bg-white bg-opacity-15 rounded-2xl p-6 backdrop-blur mb-6">
-                <p className="font-bold mb-4">{t.benefitsLabel}</p>
+                <p className="font-bold mb-4">{t.afterHeading}</p>
                 <ul className="space-y-3 text-sm">
-                  {t.benefits.map((benefit, i) => (
-                    <li key={i}>{benefit}</li>
+                  {t.after.map((item, i) => (
+                    <li key={i} className="flex gap-2 items-start">
+                      <span>✓</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
+
+              <button
+                onClick={onQuickChat}
+                className="w-full bg-white text-blue-600 py-3 rounded-xl font-bold hover:bg-blue-50 transition"
+              >
+                {t.cta}
+              </button>
             </div>
           </div>
         </div>
@@ -791,24 +793,30 @@ export function GoogleBusiness({ locale }) {
 }
 ```
 
-- [ ] **Step 4: Wire into both pages**
+- [ ] **Step 2: Wire into both pages**
 
-Replace the `{/* GOOGLE MEUS NEGÓCIOS SECTION */}` / `{/* GOOGLE MY BUSINESS SECTION */}` block with `<GoogleBusiness locale="pt" />` / `<GoogleBusiness locale="en" />`, adding the import.
+Replace the `{/* GOOGLE MEUS NEGÓCIOS SECTION */}` / `{/* GOOGLE MY BUSINESS SECTION */}` block with `<GoogleBusiness locale="pt" onQuickChat={() => setIsContactOpen(true)} />` / `<GoogleBusiness locale="en" onQuickChat={() => setIsContactOpen(true)} />`, adding the import. `setIsContactOpen` already exists in both page files (used by `Hero` and `ContactModal`).
 
-- [ ] **Step 5: Verify in the browser**
+- [ ] **Step 3: Verify in the browser**
 
 ```bash
 npm run dev
 ```
 
-Open `/` and `/en`, scroll to this section, and confirm the "73%" counts up from 0 when it enters the viewport (not just displayed statically). Stop the dev server.
+Open `/` and `/en`. Confirm: the 4 problem bullets render with the warning-style icon, the ranking card shows "p. 3+" struck through on the left and "1º"/"1st" bold on the right with an arrow between them, the 4 "after" bullets render with checkmarks, and clicking the card's button opens the `ContactModal`. Stop the dev server.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
-git add components/ui components/sections/GoogleBusiness.jsx app/page.jsx app/en/page.jsx package.json package-lock.json
+git add components/sections/GoogleBusiness.jsx app/page.jsx app/en/page.jsx
 git commit -m "$(cat <<'EOF'
-Redesign Google Meus Negocios section with animated NumberTicker
+Redesign Google Business Profile section with before/after ranking comparison
+
+Amended from the original NumberTicker-based design: the content was
+repositioned around TrustlyGo's real GBP/local-SEO offer, which has no
+single animatable number, so this uses a before/after ranking swap
+instead (p. 3+ -> 1st), sourced from lib/i18n/content.js's problems/
+rankingBefore/rankingAfter/after fields.
 
 Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
 EOF
@@ -817,15 +825,17 @@ EOF
 
 ---
 
-### Task 7: Portfolio section with 3D Card Effect
+### Task 7 (AMENDED 2026-09-12): Plans section (formerly Portfolio) with 3D Card Effect
+
+> **This task supersedes the original "Portfolio" version.** The site no longer showcases past client projects — `content[locale].portfolio` now holds TrustlyGo's real 3 pricing tiers (`plans: [{name, summary, tag, features[]}]`) instead of `projects: [{title, desc, url}]`. The content key stays named `portfolio` (to avoid churning the already-committed `portfolioRef`/`scrollToPortfolio` identifiers from Task 4), but it now renders as a pricing/plans section. This is also the first section where `accent` (#f59e0b) is used on a real primary CTA button, per the plan's global constraint.
 
 **Files:**
 - Create: `components/sections/Portfolio.jsx`
 - Modify: `app/page.jsx`, `app/en/page.jsx`
 
 **Interfaces:**
-- Consumes: `content[locale].portfolio`; `@/components/ui/3d-card`.
-- Produces: `export function Portfolio({ locale, forwardedRef })` — `forwardedRef` must attach to the section's root DOM node, since `app/page.jsx` scrolls to it from the Hero's "Ver Portfólio" button.
+- Consumes: `content[locale].portfolio` (shape: `eyebrow`, `heading`, `description`, `cta`, `plans: [{name, summary, tag: string|null, features: string[]}]`, always 3 entries); `@/components/ui/3d-card`.
+- Produces: `export function Portfolio({ locale, forwardedRef, onQuickChat })` — `forwardedRef` must attach to the section's root DOM node (Hero's "Ver Planos"/"View Plans" button scrolls to it); `onQuickChat` opens the shared `ContactModal` when a plan's CTA button is clicked.
 
 - [ ] **Step 1: Install the component**
 
@@ -839,7 +849,7 @@ npx shadcn@latest add @aceternity/3d-card-effect
 cat components/ui/3d-card.jsx
 ```
 
-Confirm the exported names (`CardContainer`, `CardBody`, `CardItem`) and the exact filename (the CLI may name it `3d-card.jsx` or `3d-card-effect.jsx` — use whichever it actually created in the import below).
+Confirm the exported names (`CardContainer`, `CardBody`, `CardItem`) and the exact filename (the CLI may name it `3d-card.jsx` or `3d-card-effect.jsx` — use whichever it actually created in the import below). Per the lessons from Tasks 4-5, also check this file for Tailwind v4-only syntax (`@theme` blocks in `app/globals.css`, or v4-only utility classes like `bg-linear-*`, `border-(...)`, `mask-*` inside the component itself) and port/rewrite to v3-compatible equivalents if found, following the same approach as Task 4's `tailwind.config.js` port and Task 5's `border-beam.jsx` rewrite.
 
 - [ ] **Step 3: Create the section**
 
@@ -848,31 +858,55 @@ Confirm the exported names (`CardContainer`, `CardBody`, `CardItem`) and the exa
 import { content } from '@/lib/i18n/content'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 
-const GRADIENTS = ['from-secondary to-pink-600', 'from-pink-600 to-red-600', 'from-cyan-500 to-blue-600']
-
-export function Portfolio({ locale, forwardedRef }) {
+export function Portfolio({ locale, forwardedRef, onQuickChat }) {
   const t = content[locale].portfolio
 
   return (
     <section ref={forwardedRef} className="py-32 px-4 bg-gradient-to-br from-slate-900 via-indigo-900 to-indigo-800 relative">
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-20 animate-fade-in-up">
+        <div className="text-center mb-16 animate-fade-in-up">
           <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{t.eyebrow}</span>
-          <h2 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">{t.heading}</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-4">{t.heading}</h2>
+          <p className="text-indigo-200 max-w-2xl mx-auto">{t.description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {t.projects.map((project, i) => (
+          {t.plans.map((plan, i) => (
             <CardContainer key={i} className="inter-var">
-              <CardBody className={`bg-gradient-to-br ${GRADIENTS[i]} rounded-3xl p-8 min-h-64 w-full h-full flex flex-col justify-between text-white border-0`}>
-                <CardItem translateZ="50" className="text-3xl font-bold mb-3">
-                  {project.title}
+              <CardBody
+                className={`relative rounded-3xl p-8 min-h-[26rem] w-full h-full flex flex-col text-white border ${
+                  plan.tag ? 'bg-gradient-to-br from-secondary to-primary border-transparent' : 'bg-white bg-opacity-5 border-white border-opacity-10'
+                }`}
+              >
+                {plan.tag && (
+                  <CardItem
+                    translateZ="30"
+                    className="absolute -top-3 right-8 bg-accent text-dark text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+                  >
+                    {plan.tag}
+                  </CardItem>
+                )}
+                <CardItem translateZ="50" className="text-2xl font-bold mb-2">
+                  {plan.name}
                 </CardItem>
-                <CardItem as="p" translateZ="40" className="text-white text-opacity-90 leading-relaxed">
-                  {project.desc}
+                <CardItem as="p" translateZ="40" className="text-white text-opacity-80 mb-6">
+                  {plan.summary}
                 </CardItem>
-                <CardItem translateZ="60" as="a" href={project.url} target="_blank" rel="noopener noreferrer" className="text-lg font-bold mt-6 inline-block">
-                  {t.cta} →
+                <CardItem translateZ="30" className="flex-1 space-y-3 mb-6">
+                  {plan.features.map((feature, j) => (
+                    <div key={j} className="flex gap-2 items-start text-sm text-white text-opacity-90">
+                      <span>✓</span>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </CardItem>
+                <CardItem translateZ="60" className="w-full">
+                  <button
+                    onClick={onQuickChat}
+                    className="w-full bg-accent hover:bg-accent-dark text-dark py-3 rounded-xl font-bold transition"
+                  >
+                    {t.cta}
+                  </button>
                 </CardItem>
               </CardBody>
             </CardContainer>
@@ -889,10 +923,10 @@ export function Portfolio({ locale, forwardedRef }) {
 Replace the `{/* PORTFOLIO SECTION */}` block with:
 
 ```jsx
-<Portfolio locale="pt" forwardedRef={portfolioRef} />
+<Portfolio locale="pt" forwardedRef={portfolioRef} onQuickChat={() => setIsContactOpen(true)} />
 ```
 
-Add `import { Portfolio } from '@/components/sections/Portfolio'`. Keep the existing `portfolioRef` and `scrollToPortfolio` definitions at the top of the file (used by the Hero from Task 4).
+Add `import { Portfolio } from '@/components/sections/Portfolio'`. Keep the existing `portfolioRef` and `scrollToPortfolio` definitions at the top of the file (used by the Hero from Task 4) — do not rename them.
 
 - [ ] **Step 5: Wire into `app/en/page.jsx`**
 
@@ -904,14 +938,20 @@ Same as Step 4, `locale="en"`.
 npm run dev
 ```
 
-Open `/` and `/en`. Confirm the "Ver Portfólio"/"View Portfolio" button still scrolls to this section, each card tilts in 3D following the mouse on hover, and clicking a card's CTA link opens the correct project URL in a new tab.
+Open `/` and `/en`. Confirm the "Ver Planos"/"View Plans" Hero button still scrolls to this section, all 3 plan cards render (name, summary, feature list, CTA button), the middle "Reposicionamento"/"Repositioning" card shows the "Mais procurado"/"Most popular" tag badge and a distinct indigo/purple gradient background (the other two use the subtle dark-glass background), each card tilts in 3D following the mouse on hover, and clicking any plan's CTA button opens the `ContactModal`.
 
 - [ ] **Step 7: Commit**
 
 ```bash
 git add components/ui components/sections/Portfolio.jsx app/page.jsx app/en/page.jsx package.json package-lock.json
 git commit -m "$(cat <<'EOF'
-Redesign Portfolio section with 3D Card Effect
+Redesign Portfolio section as a Plans/pricing section with 3D Card Effect
+
+Amended from the original project-portfolio design: the site no
+longer showcases past client work, so this renders TrustlyGo's real
+3 pricing tiers (content[locale].portfolio.plans) instead, using the
+accent color on each plan's real CTA button per the plan's
+accent-on-CTA-only constraint.
 
 Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
 EOF
@@ -1058,6 +1098,8 @@ export function CtaFinal({ locale, onScheduleChat }) {
 }
 ```
 
+> **AMENDED 2026-09-12:** `content[locale].portfolio` no longer has a `projects` array (see Task 7's amendment) — it now has `plans: [{name, summary, tag, features}]`, and plans don't link out to external URLs. The footer's third column now lists plan names as buttons that open the `ContactModal`, instead of external links.
+
 - [ ] **Step 4: Extract the footer (no new dependency — pure extraction)**
 
 ```jsx
@@ -1066,7 +1108,7 @@ import { content } from '@/lib/i18n/content'
 
 export function SiteFooter({ locale, onOpenChat }) {
   const t = content[locale].footer
-  const portfolioLinks = content[locale].portfolio.projects
+  const plans = content[locale].portfolio.plans
 
   return (
     <footer className="bg-dark text-white py-16 px-4">
@@ -1098,8 +1140,8 @@ export function SiteFooter({ locale, onOpenChat }) {
           <div>
             <h4 className="font-bold mb-4">{t.portfolioLabel}</h4>
             <ul className="space-y-2 text-gray-300">
-              {portfolioLinks.map((project, i) => (
-                <li key={i}><a href={project.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition">{project.title}</a></li>
+              {plans.map((plan, i) => (
+                <li key={i}><button onClick={onOpenChat} className="hover:text-white transition text-left">{plan.name}</button></li>
               ))}
             </ul>
           </div>
@@ -1151,8 +1193,8 @@ export default function Home() {
     <>
       <Hero locale="pt" onViewPortfolio={scrollToPortfolio} onQuickChat={() => setIsContactOpen(true)} />
       <Services locale="pt" />
-      <GoogleBusiness locale="pt" />
-      <Portfolio locale="pt" forwardedRef={portfolioRef} />
+      <GoogleBusiness locale="pt" onQuickChat={() => setIsContactOpen(true)} />
+      <Portfolio locale="pt" forwardedRef={portfolioRef} onQuickChat={() => setIsContactOpen(true)} />
       <Team locale="pt" />
       <CtaFinal locale="pt" onScheduleChat={() => setIsContactOpen(true)} />
       <SiteFooter locale="pt" onOpenChat={() => setIsContactOpen(true)} />
