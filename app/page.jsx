@@ -5,6 +5,7 @@ import { ContactModal } from '@/components/ContactModal'
 import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
 import { GoogleBusiness } from '@/components/sections/GoogleBusiness'
+import { Portfolio } from '@/components/sections/Portfolio'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -22,58 +23,7 @@ export default function Home() {
 
       <GoogleBusiness locale="pt" onQuickChat={() => setIsContactOpen(true)} />
 
-      {/* PORTFOLIO SECTION */}
-      <section ref={portfolioRef} className="py-32 px-4 bg-gradient-to-br from-slate-900 via-indigo-900 to-indigo-800 relative">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600 rounded-full opacity-10 -mr-48 -mt-48"></div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-20 animate-fade-in-up">
-            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">Portfólio</span>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
-              Projetos que transformaram negócios
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Seluma Engenharia',
-                desc: 'Website profissional com portfólio de projetos interativo e sistema de contato integrado',
-                url: 'https://seluma.eng.br',
-                gradient: 'from-purple-600 to-pink-600',
-              },
-              {
-                title: 'Surbi Engenharia',
-                desc: 'Plataforma moderna com showcasing de expertise técnica e sistema de propostas online',
-                url: 'https://surbi.eng.br',
-                gradient: 'from-pink-600 to-red-600',
-              },
-              {
-                title: 'TrustlyGo',
-                desc: 'Solução inovadora com interface intuitiva e arquitetura escalável de última geração',
-                url: 'https://trustlygo.com',
-                gradient: 'from-cyan-500 to-blue-600',
-              },
-            ].map((project, i) => (
-              <a
-                key={i}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`project-card bg-gradient-to-br ${project.gradient} rounded-3xl p-8 min-h-64 flex flex-col justify-between text-white hover:text-white no-underline group`}
-              >
-                <div>
-                  <h3 className="text-3xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-white text-opacity-90 leading-relaxed">{project.desc}</p>
-                </div>
-                <div className="text-lg font-bold group-hover:translate-x-2 transition-transform">
-                  Explorar Projeto →
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Portfolio locale="pt" forwardedRef={portfolioRef} onQuickChat={() => setIsContactOpen(true)} />
 
       {/* TEAM SECTION */}
       <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
