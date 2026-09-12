@@ -31,7 +31,7 @@ export function Services({ locale }) {
               cta={undefined}
               Icon={NoIcon}
             >
-              <BorderBeam size={80} duration={8} colorFrom="#4f46e5" colorTo="#f59e0b" />
+              <BorderBeam size={80} duration={8} colorFrom="#4f46e5" colorTo="#9333ea" />
             </BentoCard>
           ))}
         </BentoGrid>
