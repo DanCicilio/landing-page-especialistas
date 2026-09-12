@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { ContactModal } from '@/components/ContactModal'
 import { Hero } from '@/components/sections/Hero'
 import { Services } from '@/components/sections/Services'
+import { GoogleBusiness } from '@/components/sections/GoogleBusiness'
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -19,55 +20,7 @@ export default function Home() {
 
       <Services locale="en" />
 
-      {/* GOOGLE MY BUSINESS SECTION */}
-      <section className="py-32 px-4 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in-left">
-              <span className="text-blue-600 text-sm font-bold uppercase tracking-widest">Specialists in</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-dark my-4">Google My Business</h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Get your company showing up in local search results. We manage insertion, updates and complete optimization of your profile for maximum visibility and conversion.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                {['Complete Insertion', 'Regular Updates', 'Review Management', 'Analytics & Reports'].map((item, i) => (
-                  <div key={i} className="flex gap-4 items-start">
-                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mt-1">✓</div>
-                    <div>
-                      <h4 className="font-bold text-dark">{item}</h4>
-                      <p className="text-sm text-gray-600">
-                        {item === 'Complete Insertion' && 'Creation and optimization of your profile with all essential information'}
-                        {item === 'Regular Updates' && 'Constant maintenance with updated data and fresh content'}
-                        {item === 'Review Management' && 'Strategic monitoring and response to comments and ratings'}
-                        {item === 'Analytics & Reports' && 'Tracking of views, clicks and monthly conversions'}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="animate-slide-in-right">
-              <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-3xl p-10 text-white shadow-2xl">
-                <div className="text-6xl font-bold mb-4">73%</div>
-                <p className="text-lg mb-8 leading-relaxed">Of local searches result in physical visits</p>
-
-                <div className="bg-white bg-opacity-15 rounded-2xl p-6 backdrop-blur mb-6">
-                  <p className="font-bold mb-4">Proven Benefits:</p>
-                  <ul className="space-y-3 text-sm">
-                    <li>📍 Show up on Google Maps</li>
-                    <li>⭐ Increase ratings and credibility</li>
-                    <li>📞 More calls and messages</li>
-                    <li>🏪 More physical visits</li>
-                    <li>💰 Better ROI on local marketing</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GoogleBusiness locale="en" onQuickChat={() => setIsContactOpen(true)} />
 
       {/* PORTFOLIO SECTION */}
       <section ref={portfolioRef} className="py-32 px-4 bg-gradient-to-br from-slate-900 via-indigo-900 to-indigo-800 relative">
