@@ -7,8 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#6366f1',
-        secondary: '#ec4899',
+        primary: '#4f46e5',
+        'primary-dark': '#3730a3',
+        secondary: '#9333ea',
+        accent: '#f59e0b',
+        'accent-dark': '#d97706',
         dark: '#0a0e27',
       },
       animation: {
